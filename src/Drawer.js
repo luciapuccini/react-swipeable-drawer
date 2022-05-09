@@ -1,16 +1,9 @@
 import { Component } from "react";
-import PropTypes from "prop-types";
 
 const START_TRANSLATION = -10;
 const STOP_TRANSLATION = 100;
 
 class Drawer extends Component {
-  static propTypes = {
-    position: PropTypes.oneOf(["left", "right", "top", "bottom"]).isRequired,
-    size: PropTypes.number.isRequired,
-    children: PropTypes.func.isRequired,
-  };
-
   state = {
     swiping: false,
     scrolling: false,
@@ -52,7 +45,6 @@ class Drawer extends Component {
   };
 
   handleTouchMove = size => event => {
-    const { position } = this.props;
     const {
       clientX: prevClientX,
       clientY: prevClientY,
@@ -60,24 +52,24 @@ class Drawer extends Component {
     } = this.state;
 
     const maxWidth = window.innerWidth;
+    const maxHeigth = window.innerHeight;
     const { clientX, clientY } = event.targetTouches[0];
 
     const diffTranslateX = Math.abs(clientX - prevClientX);
     const diffTranslateY = Math.abs(clientY - prevClientY);
 
     if (scrolling || diffTranslateY > diffTranslateX) {
-      this.setState({ scrolling: true });
-    } else if (position === "right") {
       this.setState({
+        scrolling: true,
         translation: Math.min(
-          (maxWidth - clientX) / (maxWidth * size / 100) * 100,
+          ((maxHeigth - clientY) / ((maxHeigth * size) / 100)) * 100,
           STOP_TRANSLATION
         ),
       });
     } else {
       this.setState({
         translation: Math.min(
-          clientX / (maxWidth * size / 100) * 100,
+          (clientX / ((maxWidth * size) / 100)) * 100,
           STOP_TRANSLATION
         ),
       });
@@ -93,6 +85,7 @@ class Drawer extends Component {
   };
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { position, size, children } = this.props;
     const { swiping, translation } = this.state;
 

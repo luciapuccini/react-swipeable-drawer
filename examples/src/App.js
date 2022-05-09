@@ -1,7 +1,4 @@
 import React from "react";
-import FaBars from "react-icons/lib/fa/bars";
-
-import CupcakeIpsum from "./CupcakeIpsum";
 
 import "./MainContent.css";
 
@@ -10,10 +7,8 @@ import Drawer, {
   MainContentContainer,
 } from "../../src/Drawer";
 
-import DrawerContent from "./DrawerContent";
-
 const App = () => (
-  <Drawer position="left" size={80}>
+  <Drawer position="bottom" size={30}>
     {({
       position,
       size,
@@ -35,20 +30,42 @@ const App = () => (
           handleTouchStart={handleTouchStart}
           handleTouchMove={handleTouchMove}
           handleTouchEnd={handleTouchEnd}
-          drawerContent={<DrawerContent />}
+          drawerContent={
+            <div
+              style={{
+                height: "100%",
+                background: "white",
+                borderRadius: "20px 20px 0 0",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "25%",
+                    background: "grey",
+                    height: "5px",
+                    margin: "12px",
+                    borderRadius: "20px",
+                  }}
+                />
+                <h2>Welcome to React</h2>
+              </div>
+            </div>
+          }
         />
         <MainContentContainer
           translation={translation}
           mainContentScroll={mainContentScroll}
         >
-          <div className="MainContent">
-            <div className="MainContent-navbar">
-              <FaBars size={24} color="white" onClick={toggleDrawer} />
-              <h1 className="MainContent-navbar-title">
-                React Swipeable Drawer
-              </h1>
-            </div>
-            <CupcakeIpsum />
+          <div>
+            <h1>React Swipeable Drawer</h1>
           </div>
         </MainContentContainer>
       </div>

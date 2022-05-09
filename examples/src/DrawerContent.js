@@ -7,11 +7,9 @@ import "./DrawerContent.css";
 
 const DrawerContent = () => (
   <div className="DrawerContent" style={{}}>
-    <div className="DrawerContent-header">
-      <img src={logo} className="DrawerContent-logo" alt="logo" />
+    <div>
       <h2>Welcome to React</h2>
     </div>
-    <CupcakeIpsum />
   </div>
 );
 
